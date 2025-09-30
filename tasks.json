@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "title": "Mi primera tarea para testar servidor",
+    "completed": false
+  },
+  {
+    "id": 2,
+    "title": "Otra tarea para probar la creación de ids",
+    "completed": false
+  }
+]
