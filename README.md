@@ -53,10 +53,6 @@ Desarrollar una pequeña aplicación en Node.js que permita gestionar tareas, al
    3. `PUT /tasks/:id` valida que el id sea un número y que el body tenga al menos uno de los campos a actualizar (title o completed). Si no cumple, responde con error 400. Si cumple, llama a la función `updateTask` de `fileUtils.js` para actualizar la tarea. Internamente, `updateTask` utiliza `writeTasks` para escribir en el archivo.
    4. `DELETE /tasks/:id` valida que el id sea un número. Si no lo es, responde con error 400. Si lo es, llama a la función `deleteTask` de `fileUtils.js` para eliminar la tarea. Internamente, `deleteTask` utiliza `writeTasks` para escribir en el archivo.
 
-Otras notas:
-
-1. La lógica de creación del id se basa en una variable de entorno `NEXT_ID` inicializada en 1 que captura el último id creado. Esto permite manejar los "agujeros" producidos por las eliminaciones tal como si se tratara de una base de datos.
-
 ## Testeando los endpoints
 
 Aunque puedes utilizar Postman, Insomnia o similares para probar los endpoints, yo los probé con `curl` y dejo documentado el set de comandos para testear todos los endpoints:
