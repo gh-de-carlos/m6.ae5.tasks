@@ -1,12 +1,12 @@
 [
   {
-    "id": 1,
-    "title": "Mi primera tarea para testar servidor",
-    "completed": false
+    "id": 2,
+    "title": "Esta tarea ahora está modificada",
+    "completed": true
   },
   {
-    "id": 2,
-    "title": "Otra tarea para probar la creación de ids",
+    "id": 3,
+    "title": "Otra tarea verificando antes de entregar",
     "completed": false
   }
 ]

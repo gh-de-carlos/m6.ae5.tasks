@@ -50,6 +50,8 @@ Desarrollar una pequeña aplicación en Node.js que permita gestionar tareas, al
 5. Comenzamos a implementar las rutas en `server.js`:
    1. `POST /tasks` valida el body para que tenga todos los campos solicitados: title, completed. Si no los tiene, responde con un error 400. Si los tiene, llama a la función `createTask` de `fileUtils.js` para agregar la tarea al archivo `tasks.json`. Internamente, `createTask` utiliza `writeTasks` para escribir en el archivo.
    2. `GET /tasks` llama a la función `readTasks` de `fileUtils.js` para obtener todas las tareas y devolverlas en la respuesta.
+   3. `PUT /tasks/:id` valida que el id sea un número y que el body tenga al menos uno de los campos a actualizar (title o completed). Si no cumple, responde con error 400. Si cumple, llama a la función `updateTask` de `fileUtils.js` para actualizar la tarea. Internamente, `updateTask` utiliza `writeTasks` para escribir en el archivo.
+   4. `DELETE /tasks/:id` valida que el id sea un número. Si no lo es, responde con error 400. Si lo es, llama a la función `deleteTask` de `fileUtils.js` para eliminar la tarea. Internamente, `deleteTask` utiliza `writeTasks` para escribir en el archivo.
 
 Otras notas:
 
@@ -77,3 +79,10 @@ curl -X PUT http://localhost:3000/tasks/1 -H "Content-Type: application/json" -d
 # Eliminar una tarea (nuevamente utilizaremos el id 1)
 curl -X DELETE http://localhost:3000/tasks/1
 ```
+
+## Potenciales mejoras para otras entregas
+
+- Implementar paginación en `GET /tasks` para manejar grandes cantidades de tareas.
+- Mejorar las validaciones de los datos de entrada y los id.
+- Mejorar el manejo de errores y respuestas, ej.: dividir "no encontrado o no se pudo [acción]" en dos funciones diferentes.
+- Implementar una capa de servicio para mejorar la separación de responsabilidades y mejorar las respuestas.

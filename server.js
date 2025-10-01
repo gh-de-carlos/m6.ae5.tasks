@@ -44,9 +44,65 @@ app.get('/tasks', (req, res) => {
    });
 });
 
-// TODO Implementar la actualización de tareas
+// Update a task
+app.put('/tasks/:id', (req, res) => {
+  const { id } = req.params;
+  const updatedData = req.body;
 
-// TODO Implementar el borrado de tareas
+  if (isNaN(id)) {
+    return res.status(400).json({
+      message: 'El id debe ser un número.',
+      success: false
+    });
+  }
+
+  if (!updatedData ||
+     (!updatedData.title &&
+     (updatedData.completed !== true && updatedData.completed !== false))) {
+    return res.status(400).json({
+      message: 'Debe incluir al menos un campo para actualizar: title o completed',
+      success: false
+    });
+  }
+
+  const isUpdated = updateTask(id, updatedData);
+  if (!isUpdated) {
+    return res.status(404).json({
+      message: 'Tarea no encontrada o no se ha podido actualizar.',
+      success: false
+    });
+  }
+
+  res.status(200).json({
+    message: 'Tarea actualizada exitosamente',
+    success: true,
+    task: isUpdated
+  });
+});
+
+// Delete a task
+app.delete('/tasks/:id', (req, res) => {
+  const { id } = req.params;
+  if (isNaN(id)) {
+    return res.status(400).json({
+      message: 'El id debe ser un número.',
+      success: false
+    });
+  }
+
+  const isDeleted = deleteTask(id);
+  if (!isDeleted) {
+    return res.status(404).json({
+      message: 'Tarea no encontrada o no se ha podido borrar.',
+      success: false
+    });
+  }
+
+  res.status(200).json({
+    message: 'Tarea borrada exitosamente',
+    success: true
+  });
+});
 
 // Iniciamos el servidor
 app.listen(PORT, () => console.log(RUNNING_SERVER_MSG));

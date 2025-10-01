@@ -20,6 +20,7 @@ const readTasks = () => {
   return JSON.parse(tasksData);
 }
 
+// Create a new task
 const createTask = (task) => {
   if (!fileExists()) {
     return null;
@@ -33,12 +34,38 @@ const createTask = (task) => {
   return newTask;
 }
 
+// Update an existing task
 const updateTask = (id, updatedTask) => {
-  return ''; // TODO implement here...
+  if (!fileExists()) {
+    return null;
+  }
+
+  const tasks = readTasks();
+  const taskIndex = tasks.findIndex(task => task.id === parseInt(id, 10));
+  if (taskIndex === -1) {
+    return null;
+  }
+
+  tasks[taskIndex] = { ...tasks[taskIndex], ...updatedTask };
+  writeTasks(tasks);
+  return tasks[taskIndex];
 }
 
+// Delete a task
 const deleteTask = (id) => {
-  return ''; // TODO implement here...
+  if (!fileExists()) {
+    return null;
+  }
+
+  const tasks = readTasks();
+  const taskIndex = tasks.findIndex(task => task.id === parseInt(id, 10));
+  if (taskIndex === -1) {
+    return null;
+  }
+
+  tasks.splice(taskIndex, 1);
+  writeTasks(tasks);
+  return true;
 }
 
 module.exports = {
